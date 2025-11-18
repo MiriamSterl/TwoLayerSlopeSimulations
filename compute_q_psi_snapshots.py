@@ -61,7 +61,6 @@ def save_snapshots(slope,field):
     H1 = H['1'].flatten()[0]
     H2 = H['2'].flatten()[0]
     
-    gp = g*(rho2-rho1)/rho2
     f0sqongp = f0**2 / gp
     F1 = f0sqongp/H1
     Delta = Krsq + f0sqongp * (H1 + H2) / (H1 * H2)
@@ -89,9 +88,11 @@ def save_snapshots(slope,field):
 
 #%% Save snapshots for each slope and field
 
-slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4', 
-          '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '-5e-3', '7e-3', '-7e-3']
-fields = ['1', '2', '3']
+# slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4', 
+#           '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '-5e-3', '7e-3', '-7e-3']
+# fields = ['1', '2', '3']
+slopes = ['5e-3', '-5e-3', '7e-3', '-7e-3']
+fields = ['2', '3']
 for field,slope in product(fields,slopes):
     save_snapshots(slope, field)
 
