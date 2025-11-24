@@ -5,7 +5,8 @@ Save q and psi snapshots
 import h5py
 import numpy as np
 from numpy.fft import irfft2
-import sys
+from itertools import product
+
 
 #%% Conversion functions
 def get_qhi(qhi):
@@ -56,10 +57,16 @@ def save_snapshots(slope,field):
 
     # Other factors needed
     f0 = np.array(f["params"]["f₀"]).flatten()[0]
-    gp = np.array(f["params"]["g′"]).flatten()[0][0]
     H = np.array(f["params"]["H"])
     H1 = H['1'].flatten()[0]
     H2 = H['2'].flatten()[0]
+    gp = np.array(f["params"]["g′"]).flatten()[0][0]
+    # if g and ρ are saved, replace the line above by:
+    # g = np.array(f["params"]["g"]).flatten()[0]
+    # rho = np.array(f["params"]["ρ"])
+    # rho1 = rho[0][0][0]
+    # rho2 = rho[1][0][0]
+    # gp = g*(rho2-rho1)/rho
     
     f0sqongp = f0**2 / gp
     F1 = f0sqongp/H1
@@ -79,8 +86,8 @@ def save_snapshots(slope,field):
     psihi = streamfunctionfrompv(qhi, Krsq, f0sqongp, H1, H2, invKrsqonDelta)
     psi = irfft2(psihi, axes=(-2, -1))
 
-    np.save("../Results/Results_GeophysicalFlows/x.npy",x)
-    np.save("../Results/Results_GeophysicalFlows/y.npy",y)
+    np.save("../../Results/Results_GeophysicalFlows/x.npy",x)
+    np.save("../../Results/Results_GeophysicalFlows/y.npy",y)
 
     np.save("../../Results/Results_GeophysicalFlows/SmallLd/"+fn_base+"_snapshot_q.npy",q)
     np.save("../../Results/Results_GeophysicalFlows/SmallLd/"+fn_base+"_snapshot_psi.npy",psi)
@@ -88,11 +95,9 @@ def save_snapshots(slope,field):
 
 #%% Save snapshots for each slope and field
 
-# slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4', 
-#           '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '-5e-3', '7e-3', '-7e-3']
-# fields = ['1', '2', '3']
-slopes = ['5e-3', '-5e-3', '7e-3', '-7e-3']
-fields = ['2', '3']
+slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4', 
+          '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '-5e-3', '7e-3', '-7e-3']
+fields = ['1', '2', '3']
 for field,slope in product(fields,slopes):
     save_snapshots(slope, field)
 

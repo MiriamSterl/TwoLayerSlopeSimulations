@@ -29,7 +29,7 @@ def v_acov(slope,layer,field,run,biased,normed):
     compute autocovariance of cross-stream velocity timeseries, averaged over all particles
     """
     data = xr.open_zarr('../../Results/Results_Parcels/SmallLd/simulation_s'+slope+'_strongmu_field'+field
-                        +'_advection_layer'+layer+'_run'+run+'_1hr12hr.zarr')
+                        +'_advection_layer'+layer+'_run'+run+'_1hr12hr.zarr',decode_timedelta=True)
     t = (data['time'].values[0,0:801] / np.timedelta64(1,'s')).astype(int)
     v = data['v'].values[:,0:801]
     lon = data['lon'].values[:,0:801]
@@ -92,11 +92,9 @@ def compute_acov_diff(slope,layer,field,biased,normed):
 
 #%% Run calculation for each slope, layer, and field
 
-# slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4',
-#           '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '7e-3']
-slopes = ['5e-3', '7e-3']
+slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4',
+          '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '7e-3']
 layers = ['1','2']
-#fields = ['1','2','3']
-fields = ['2', '3']
+fields = ['1','2','3']
 for slope,layer,field in product(slopes,layers,fields):
     compute_acov_diff(slope, layer, field, biased=True, normed=False)

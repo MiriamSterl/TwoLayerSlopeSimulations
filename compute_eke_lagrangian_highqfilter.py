@@ -30,7 +30,7 @@ def compute_EKE(slope,layer,field,run):
     U = np.array(f["params"]["U"]).flatten()[0]
     
     data = xr.open_zarr('../../Results/Results_Parcels/SmallLd/simulation_s'+slope+'_strongmu_field'+field
-                            +'_advection_layer'+layer+'_run'+run+'_1hr12hr.zarr')
+                            +'_advection_layer'+layer+'_run'+run+'_1hr12hr.zarr',decode_timedelta=True)
     lon = data['lon'].values[:,0:801]
     lat = data['lat'].values[:,0:801]
     u_tot = data['u'].values
@@ -102,10 +102,9 @@ def compute_save_EKE(slope,field):
 
 
 #%% Compute & save EKE
-# slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4',
-#           '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '7e-3']
-slopes = ['5e-3', '7e-3']
+slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4',
+          '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '7e-3']
 for slope in slopes:
-    #compute_save_EKE(slope, '1')
+    compute_save_EKE(slope, '1')
     compute_save_EKE(slope, '2')
     compute_save_EKE(slope, '3')

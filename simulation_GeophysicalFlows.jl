@@ -125,5 +125,5 @@ function simulation(slope,spinupdays,rundays,field)
     end
 
 
-    println("Simulation with s = "*slope*" finished")
+    println("Simulation with s = "*slope*", field = "*field*" finished")
 end

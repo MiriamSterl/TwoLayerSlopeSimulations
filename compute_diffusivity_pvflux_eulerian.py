@@ -3,8 +3,8 @@
 import h5py
 import numpy as np
 from numpy.fft import irfft2
-from itertools import product
 import pandas as pd
+from itertools import product
 
 
 #%% Simulation parameters
@@ -71,15 +71,15 @@ def compute_eulerian_diffusivity(slope,field):
     flux_layer1 = -1 * np.mean(v[:,0,:,:]*q[:,0,:,:], axis=(1,2))
     flux_layer2 = -1 * np.mean(v[:,1,:,:]*q[:,1,:,:], axis=(1,2))
 
-    diff_layer1 = flux_layer1 / dQdy(slope, '1', Ldtype)
-    diff_layer2 = flux_layer2 / dQdy(slope, '2', Ldtype)
+    diff_layer1 = flux_layer1 / dQdy(slope, '1')
+    diff_layer2 = flux_layer2 / dQdy(slope, '2')
 
     df_flux_layer1 = pd.DataFrame(flux_layer1)
     df_flux_layer2 = pd.DataFrame(flux_layer2)
     df_diff_layer1 = pd.DataFrame(diff_layer1)
     df_diff_layer2 = pd.DataFrame(diff_layer2)
 
-    outname = '../../Results/Results_Diffusivities/'+Ldtype+'Ld/eulerian/simulation_s'+slope+'_field'+field
+    outname = '../../Results/Results_Diffusivities/SmallLd/eulerian/simulation_s'+slope+'_field'+field
     df_flux_layer1.to_csv(outname+'_layer1_flux.csv', index=False)
     df_flux_layer2.to_csv(outname+'_layer2_flux.csv', index=False)
     df_diff_layer1.to_csv(outname+'_layer1_diff.csv', index=False)
@@ -89,10 +89,8 @@ def compute_eulerian_diffusivity(slope,field):
 
 # %% Compute & save diffusivities
 
-# slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4', 
-#           '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '7e-3']
-# fields = ['1', '2', '3']
-slopes = ['5e-3', '7e-3']
-fields = ['2', '3']
+slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4', 
+          '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '7e-3']
+fields = ['1', '2', '3']
 for field,slope in product(fields,slopes):
     compute_eulerian_diffusivity(slope, field)

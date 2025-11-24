@@ -2,13 +2,13 @@ Code accompanying the manuscript "Asymmetric effects of topographic slopes on La
 
 The script `simulation_GeophysicalFlows.jl` is run with the following parameters:
 - `slope`: `["-7e-3", "-5e-3", "-3e-3","-2e-3","-1e-3","-7e-4","-5e-4","-3e-4","-2e-4","-1e-4", "0","1e-4","2e-4","3e-4","5e-4","7e-4","1e-3","2e-3","3e-3","5e-3","7e-3"]`
-- `spinupdays`: `1000`
-- `rundays`: `670`
+- `spinupdays`: 1000
+- `rundays`: 670
 - `field`: `["1", "2", "3"]` (for each slope, the simulations is seeded with three different random seeds)
 
 The script `simulation_Parcels.py` is run for each (slope,field) combination above, with `rundays` set to 400.
 
-The scripts starting with `compute` are used for analysis of the GeophysicalFlows and Parcels output. The output is then plotted in the notebooks starting with `plot`. The script `animation.py` is used to produce animations of the flow fields.
+The scripts starting with `compute` are used for analysis of the GeophysicalFlows and Parcels output. The output is then plotted in the notebooks starting with `plot`.
 
 The folder `packages` contains lists of all the packages with their version numbers used for these scripts:
 - `Manifest.toml`: overview of Julia packages used to run GeophysicalFlows.

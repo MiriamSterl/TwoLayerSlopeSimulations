@@ -2,9 +2,8 @@
 
 import h5py
 import numpy as np
-from itertools import product
 import pandas as pd
-
+from itertools import product
 
 
 def compute_eulerian_eke(slope,field):
@@ -35,7 +34,7 @@ def compute_eulerian_eke(slope,field):
     df_eke_u_layer2 = pd.DataFrame(eke_u_layer2)
     df_eke_v_layer2 = pd.DataFrame(eke_v_layer2)
 
-    outname = '../../Results/Results_EKE/'+Ldtype+'Ld/eulerian/simulation_s'+slope+'_field'+field
+    outname = '../../Results/Results_EKE/SmallLd/eulerian/simulation_s'+slope+'_field'+field
     df_eke_u_layer1.to_csv(outname+'_layer1_eke_u.csv',index=False)
     df_eke_v_layer1.to_csv(outname+'_layer1_eke_v.csv',index=False)
     df_eke_u_layer2.to_csv(outname+'_layer2_eke_u.csv',index=False)
@@ -44,10 +43,8 @@ def compute_eulerian_eke(slope,field):
 
 # %% Compute & save EKE
 
-# slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4', 
-#           '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '7e-3']
-# fields = ['1', '2', '3']
-slopes = ['5e-3', '7e-3']
-fields = ['2', '3']
+slopes = ['0', '1e-4', '-1e-4', '2e-4', '-2e-4', '3e-4', '-3e-4', '5e-4', '-5e-4', '7e-4', '-7e-4', 
+          '1e-3', '-1e-3', '2e-3', '-2e-3', '3e-3', '-3e-3', '5e-3', '7e-3']
+fields = ['1', '2', '3']
 for field,slope in product(fields,slopes):
     compute_eulerian_eke(slope, field)
