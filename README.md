@@ -1,4 +1,4 @@
-Code accompanying the manuscript "Asymmetric effects of topographic slopes on Lagrangian and Eulerian eddy diffusivities in two-layer QG flow" submitted to *JGR: Oceans* ([preprint][https://essopenarchive.org/users/744129/articles/1361790-asymmetric-effects-of-topographic-slopes-on-lagrangian-and-eulerian-eddy-diffusivities-in-two-layer-qg-flow?commit=384d86b515e79279f1fb6d333b494b6989a3806f]).
+Code accompanying the manuscript "Asymmetric effects of topographic slopes on Lagrangian and Eulerian eddy diffusivities in two-layer QG flow" submitted to *JGR: Oceans* ([preprint](https://essopenarchive.org/users/744129/articles/1361790-asymmetric-effects-of-topographic-slopes-on-lagrangian-and-eulerian-eddy-diffusivities-in-two-layer-qg-flow?commit=384d86b515e79279f1fb6d333b494b6989a3806f)).
 
 The script `simulation_GeophysicalFlows.jl` is run with the following parameters:
 - `slope`: `["-7e-3", "-5e-3", "-3e-3","-2e-3","-1e-3","-7e-4","-5e-4","-3e-4","-2e-4","-1e-4", "0","1e-4","2e-4","3e-4","5e-4","7e-4","1e-3","2e-3","3e-3","5e-3","7e-3"]`
