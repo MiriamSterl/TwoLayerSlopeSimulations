@@ -26,41 +26,6 @@ def get_qhi(qhi):
 def compute_q(slope,field):
     f = h5py.File("../../Results/Results_GeophysicalFlows/SmallLd/simulation_s"+slope+"_strongmu_field"+field+"_equilibrium.jld2", "r")
 
-    # Grid
-    grd = f["grid"]
-    Lx, Ly, nx, ny, x, y = map(np.array, (grd["Lx"], grd["Ly"], grd["nx"], grd["ny"], grd["x"], grd["y"]))
-    Lx, Ly, nx, ny = Lx.flatten()[0], Ly.flatten()[0], nx.flatten()[0], ny.flatten()[0]
-
-    # Wavenumbers
-    nl = ny
-    nkr = nx//2 + 1
-    dk = 1/(Lx/nx)
-    kr = np.arange(0, nkr)*2*np.pi/Lx
-    l = np.concatenate((kr[:-1], -np.flipud(kr)[:-1]))
-    kr = np.reshape(kr, (1, nkr))
-    l = np.reshape(l, (nl, 1))
-    Krsq = kr**2 + l**2
-    invKrsq = 1 / Krsq
-    invKrsq[0, 0] = 0
-
-    # Other factors needed
-    f0 = np.array(f["params"]["f₀"]).flatten()[0]
-    H = np.array(f["params"]["H"])
-    H1 = H['1'].flatten()[0]
-    H2 = H['2'].flatten()[0]
-    gp = np.array(f["params"]["g′"]).flatten()[0][0]
-    # if g and ρ are saved, replace the line above by:
-    # g = np.array(f["params"]["g"]).flatten()[0]
-    # rho = np.array(f["params"]["ρ"])
-    # rho1 = rho[0][0][0]
-    # rho2 = rho[1][0][0]
-    # gp = g*(rho2-rho1)/rho
-    
-    f0sqongp = f0**2 / gp
-    F1 = f0sqongp/H1
-    Delta = Krsq + f0sqongp * (H1 + H2) / (H1 * H2)
-    invKrsqonDelta = invKrsq / Delta
-
     # Time
     t = np.array([float(ti) for ti in f["snapshots"]["t"].keys()])
     idxs = t.argsort()

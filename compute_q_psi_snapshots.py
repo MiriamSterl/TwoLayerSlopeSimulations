@@ -89,8 +89,8 @@ def save_snapshots(slope,field):
     np.save("../../Results/Results_GeophysicalFlows/x.npy",x)
     np.save("../../Results/Results_GeophysicalFlows/y.npy",y)
 
-    np.save("../../Results/Results_GeophysicalFlows/SmallLd/"+fn_base+"_snapshot_q.npy",q)
-    np.save("../../Results/Results_GeophysicalFlows/SmallLd/"+fn_base+"_snapshot_psi.npy",psi)
+    np.save("../../Results/Results_GeophysicalFlows/SmallLd/qpsi/"+fn_base+"_snapshot_q.npy",q)
+    np.save("../../Results/Results_GeophysicalFlows/SmallLd/qpsi/"+fn_base+"_snapshot_psi.npy",psi)
 
 
 #%% Save snapshots for each slope and field
