@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1098423342.svg)](https://doi.org/10.5281/zenodo.18612652)
+
 Code accompanying the manuscript "Asymmetric effects of topographic slopes and bottom friction on Lagrangian and Eulerian eddy diffusivities in two-layer QG flow" submitted to *JGR: Oceans* ([preprint](https://essopenarchive.org/users/744129/articles/1361790-asymmetric-effects-of-topographic-slopes-on-lagrangian-and-eulerian-eddy-diffusivities-in-two-layer-qg-flow?commit=384d86b515e79279f1fb6d333b494b6989a3806f)).
 
 The script `simulation_GeophysicalFlows.jl` is run with the following parameters:
